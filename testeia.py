@@ -82,29 +82,29 @@ while True:
     for facereconhe in facesreconhece2:
         distancia = face_recognition.face_distance(rostoconhecido, facereconhe)
 
-        # Verifica se a lista de distâncias não está vazia
+        
         if distancia.size > 0:
             best_match_index = np.argmin(distancia)
             name = "Desconhecido"
             
-            if distancia[best_match_index] < 0.6:  # Limite para considerar como conhecido
+            if distancia[best_match_index] < 0.6:  
                 name = nomerosto[best_match_index]
 
             face_names.append(name)
         else:
-            face_names.append("Desconhecido")  # Se não houver distâncias, adicionar como desconhecido
+            face_names.append("Desconhecido")  
 
-    # Exibir resultados na tela
+
     cvzone.putTextRect(frame, f"Quantidade de pessoas: {contandopessoas}", (50, 60), 2, 2)
 
     for (top, right, bottom, left), name in zip(localizandorosto, face_names):
         cv2.rectangle(frame, (left, top), (right, bottom), vermelho, 2)
         cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
-    # Mostrar o frame
+    
     cv2 .imshow(reconhecimento, frame)
 
-    # Verificar se o usuário pressionou 'q'
+    # aperta Q para fechar
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
